@@ -1,3 +1,3 @@
 # Pyano
 
-A virtual piano using Python
+A virtual Piano using Python
