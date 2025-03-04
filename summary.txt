@@ -1,0 +1,9 @@
+first we are installing opencv and mediapipe for camera functionalities
+
+each hand has 21 landmarks(0-20)
+Each finger has landmarks, and the fingertips are:
+Thumb - 4
+Index Finger - 8
+Middle Finger - 12
+Ring Finger - 16
+Pinky Finger - 20
