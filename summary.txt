@@ -7,3 +7,9 @@ Index Finger - 8
 Middle Finger - 12
 Ring Finger - 16
 Pinky Finger - 20
+
+using pygame for sound
+
+we are also creating a sound folder with all the necessary sounds
+
+downloaded the notes from parisjava/wav-piano-sound
