@@ -1,6 +1,6 @@
 import cv2
 import mediapipe as mp
-import pygame.mixer as play  
+import pygame.mixer as play
 
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(min_detection_confidence=0.7, min_tracking_confidence=0.7)
@@ -40,16 +40,14 @@ while cap.isOpened():
     for i, key in enumerate(white_keys):
         x_min = i * white_key_width
         x_max = x_min + white_key_width
-        key_color = (200, 200, 255) if key in active_keys else (255, 255, 255)
+        key_color = (255, 200, 200) if key in active_keys else (255, 255, 255)
         cv2.rectangle(frame, (x_min, 0), (x_max, white_key_height), key_color, -1)
         cv2.rectangle(frame, (x_min, 0), (x_max, white_key_height), (0, 0, 0), 2)
-        cv2.putText(frame, key + "3", (x_min + 20, white_key_height - 10), 
-                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA)
+        cv2.putText(frame, key + "3", (x_min + 20, white_key_height - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA)
 
     if result.multi_hand_landmarks:
         for hand_landmarks in result.multi_hand_landmarks:
-            mp_draw.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
-
+            
             for id in [4, 8, 12, 16, 20]:
                 lm = hand_landmarks.landmark[id]
                 h, w, _ = frame.shape
@@ -73,9 +71,9 @@ while cap.isOpened():
 
     active_keys = pressed_keys
 
-    cv2.imshow("Virtual Piano", frame)
+    cv2.imshow("Pyano", frame)
 
-    if cv2.waitKey(1) == 13 or cv2.getWindowProperty('Virtual Piano', cv2.WND_PROP_VISIBLE) == 0:
+    if cv2.waitKey(1) == 13 or cv2.getWindowProperty('Pyano', cv2.WND_PROP_VISIBLE) == 0:
         break
 
 cap.release()
