@@ -20,18 +20,14 @@ cap = cv2.VideoCapture(0)
 screen_width = int(cap.get(3))
 screen_height = int(cap.get(4))
 
-# Increase the video width and height for a larger display
-screen_width = screen_width * 2  # Double the width for larger display
-screen_height = screen_height * 2  # Double the height for larger display
+screen_width = screen_width * 2
+screen_height = screen_height * 2
 cap.set(3, screen_width)
 cap.set(4, screen_height)
 
-# Key size adjustments
-key_height = screen_height // 3  # Keys take 1/3 of the screen height
+key_height = screen_height // 3
 white_keys = ["C3", "D3", "E3", "F3", "G3", "A3", "B3", "C4", "D4", "E4", "F4", "G4", "A4", "B4"]
-
-# Increase the width of the keys to occupy the available width more generously
-white_key_width = screen_width // len(white_keys)  # Each key gets more width
+white_key_width = screen_width // len(white_keys)
 
 active_keys = set()
 
@@ -40,8 +36,7 @@ while cap.isOpened():
     if not ret:
         break
 
-    frame = cv2.flip(frame, 1)  # Flip the frame for better user interaction
-
+    frame = cv2.flip(frame, 1)
     pressed_keys = set()
 
     for i, key in enumerate(white_keys):
@@ -64,7 +59,7 @@ while cap.isOpened():
                 lm = hand_landmarks.landmark[id]
                 cx, cy = int(lm.x * screen_width), int(lm.y * screen_height)
 
-                if cy < key_height:  # Only register hand positions within the key region
+                if cy < key_height:
                     cv2.circle(frame, (cx, cy), 10, (0, 255, 0), -1)
 
                     for i, key in enumerate(white_keys):
