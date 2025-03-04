@@ -16,3 +16,5 @@ downloaded the notes from parisjava/wav-piano-sound
 
 downloaded new notes from plemaster01/PythonPiano
 
+multiple key pressings and pressed key highlight added
+
