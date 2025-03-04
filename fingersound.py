@@ -1,31 +1,30 @@
 import cv2
 import mediapipe as mp
-import pygame.mixer as play
+import pygame.mixer as play  
 
-# Initialize MediaPipe and Pygame
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(min_detection_confidence=0.7, min_tracking_confidence=0.7)
 mp_draw = mp.solutions.drawing_utils
 
 play.init()
 notes = {
-    "C": play.Sound("sounds/c1.wav"),
-    "D": play.Sound("sounds/d1.wav"),
-    "E": play.Sound("sounds/e1.wav"),
-    "F": play.Sound("sounds/f1.wav"),
-    "G": play.Sound("sounds/g1.wav"),
-    "A": play.Sound("sounds/a1.wav"),
-    "B": play.Sound("sounds/b1.wav")
+    "C": play.Sound("notes/C3.wav"),
+    "D": play.Sound("notes/D3.wav"),
+    "E": play.Sound("notes/E3.wav"),
+    "F": play.Sound("notes/F3.wav"),
+    "G": play.Sound("notes/G3.wav"),
+    "A": play.Sound("notes/A3.wav"),
+    "B": play.Sound("notes/B3.wav")
 }
 
 cap = cv2.VideoCapture(0)
-screen_width = int(cap.get(3))  
+screen_width = int(cap.get(3))
 screen_height = int(cap.get(4))
 
-# Define white key positions (7 keys)
 white_keys = ["C", "D", "E", "F", "G", "A", "B"]
 white_key_width = screen_width // 7
-white_key_height = screen_height // 2  # Only in top half
+white_key_height = screen_height // 2
+active_keys = set()
 
 while cap.isOpened():
     ret, frame = cap.read()
@@ -35,37 +34,44 @@ while cap.isOpened():
 
     rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     result = hands.process(rgb_frame)
-    
-    # Draw white keys
+
+    pressed_keys = set()
+
     for i, key in enumerate(white_keys):
         x_min = i * white_key_width
         x_max = x_min + white_key_width
-        cv2.rectangle(frame, (x_min, 0), (x_max, white_key_height), (255, 255, 255), -1)  # White key
-        cv2.rectangle(frame, (x_min, 0), (x_max, white_key_height), (0, 0, 0), 2)  # Black border
-        cv2.putText(frame, key, (x_min + 20, white_key_height - 10), cv2.FONT_HERSHEY_SIMPLEX, 
-                    1, (0, 0, 0), 2, cv2.LINE_AA)  # Label
+        key_color = (200, 200, 255) if key in active_keys else (255, 255, 255)
+        cv2.rectangle(frame, (x_min, 0), (x_max, white_key_height), key_color, -1)
+        cv2.rectangle(frame, (x_min, 0), (x_max, white_key_height), (0, 0, 0), 2)
+        cv2.putText(frame, key + "3", (x_min + 20, white_key_height - 10), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA)
 
     if result.multi_hand_landmarks:
         for hand_landmarks in result.multi_hand_landmarks:
             mp_draw.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
-            
-            for id in [4, 8, 12, 16, 20]:  # Fingertip landmarks
+
+            for id in [4, 8, 12, 16, 20]:
                 lm = hand_landmarks.landmark[id]
                 h, w, _ = frame.shape
-                cx, cy = int(lm.x * w), int(lm.y * h)  
+                cx, cy = int(lm.x * w), int(lm.y * h)
 
-                # Check if the fingertip is in the top half (where the keys are)
                 if cy < white_key_height:
-                    cv2.circle(frame, (cx, cy), 10, (0, 255, 0), -1)  # Mark fingertip
-                    
-                    # Detect which white key is pressed
+                    cv2.circle(frame, (cx, cy), 10, (0, 255, 0), -1)
+
                     for i, key in enumerate(white_keys):
                         x_min = i * white_key_width
                         x_max = x_min + white_key_width
                         if x_min <= cx < x_max:
-                            print(f"Playing {key}")
-                            notes[key].play()  # Play the detected note
+                            pressed_keys.add(key)
+                            if key not in active_keys:
+                                print(f"Playing {key}3")
+                                notes[key].play()
                             break
+
+    for key in active_keys - pressed_keys:
+        notes[key].stop()
+
+    active_keys = pressed_keys
 
     cv2.imshow("Virtual Piano", frame)
 

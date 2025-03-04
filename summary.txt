@@ -13,3 +13,6 @@ using pygame for sound
 we are also creating a sound folder with all the necessary sounds
 
 downloaded the notes from parisjava/wav-piano-sound
+
+downloaded new notes from plemaster01/PythonPiano
+
