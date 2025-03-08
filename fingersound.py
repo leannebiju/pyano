@@ -8,11 +8,19 @@ mp_draw = mp.solutions.drawing_utils
 
 play.init()
 notes = {
-    "C3": play.Sound("notes/C3.wav"), "D3": play.Sound("notes/D3.wav"), "E3": play.Sound("notes/E3.wav"),
-    "F3": play.Sound("notes/F3.wav"), "G3": play.Sound("notes/G3.wav"), "A3": play.Sound("notes/A3.wav"),
+    "C3": play.Sound("notes/C3.wav"), 
+    "D3": play.Sound("notes/D3.wav"), 
+    "E3": play.Sound("notes/E3.wav"),
+    "F3": play.Sound("notes/F3.wav"), 
+    "G3": play.Sound("notes/G3.wav"), 
+    "A3": play.Sound("notes/A3.wav"),
     "B3": play.Sound("notes/B3.wav"),
-    "C4": play.Sound("notes/C4.wav"), "D4": play.Sound("notes/D4.wav"), "E4": play.Sound("notes/E4.wav"),
-    "F4": play.Sound("notes/F4.wav"), "G4": play.Sound("notes/G4.wav"), "A4": play.Sound("notes/A4.wav"),
+    "C4": play.Sound("notes/C4.wav"), 
+    "D4": play.Sound("notes/D4.wav"), 
+    "E4": play.Sound("notes/E4.wav"),
+    "F4": play.Sound("notes/F4.wav"), 
+    "G4": play.Sound("notes/G4.wav"), 
+    "A4": play.Sound("notes/A4.wav"),
     "B4": play.Sound("notes/B4.wav")
 }
 
