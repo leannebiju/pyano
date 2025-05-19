@@ -2,7 +2,7 @@
 
 A virtual Piano implemented using Python.
 
-On running the program, *fingersound.py* a virtual piano appears on the top half of the screen. 
+On running the program, *fingersound.py*, a virtual piano appears on the top half of the screen. 
 
 This program uses OpenCV for Computer Vision and MediaPipe for hand tracking. 
 
