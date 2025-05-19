@@ -14,11 +14,11 @@ First install OpenCV and MediaPipe for camera and hand tracking functionalities
 
 Each hand has 21 landmarks(0-20)  
 Each finger has landmarks, and the fingertips are:  
-Thumb - 4
-Index Finger - 8
-Middle Finger - 12
-Ring Finger - 16
-Pinky Finger - 20
+Thumb - 4  
+Index Finger - 8  
+Middle Finger - 12  
+Ring Finger - 16  
+Pinky Finger - 20  
 
 We are using pygame for adding sound
 
