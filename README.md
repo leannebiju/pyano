@@ -12,8 +12,8 @@ It recognises the fingertips and whenever the fingertips enter the area of the k
 
 First install OpenCV and MediaPipe for camera and hand tracking functionalities
 
-each hand has 21 landmarks(0-20)
-Each finger has landmarks, and the fingertips are:
+Each hand has 21 landmarks(0-20)  
+Each finger has landmarks, and the fingertips are:  
 Thumb - 4
 Index Finger - 8
 Middle Finger - 12
