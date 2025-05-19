@@ -20,9 +20,7 @@ Middle Finger - 12
 Ring Finger - 16  
 Pinky Finger - 20  
 
-We are using pygame for adding sound
-
-We are also creating a sound folder with all the necessary sounds(notes)
+I used pygame for adding sound and created a sound folder with all the necessary sounds(notes)
 
 Downloaded the notes from [here](https://www.github.com/parisjava/wav-piano-sound)
 
